@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-import dj_database_url
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,7 +35,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiuseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -70,11 +70,16 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://postgres:postgres@db:5432/main',
-        conn_max_age=600,
-    )
+'default': {
+   'ENGINE': 'django.db.backends.postgresql',
+    'NAME': config('POSTGRES_NAME'),
+    'USER': config('POSTGRES_USER'),
+    'PASSWORD': config('POSTGRES_PASSWORD'),
+    'HOST': config('POSTGRES_HOST'),
+    'PORT': 5432,
 }
+}
+
 
 
 # Password validation
