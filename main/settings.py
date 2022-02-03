@@ -71,13 +71,13 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('POSTGRES_NAME'),
-        'USER': config('POSTGRES_USER'),
-        'PASSWORD': config('POSTGRES_PASSWORD'),
-        'HOST': config('POSTGRES_HOST'),
-        'PORT': 5432,
-        
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': config('DBNAME'),
+    'USER': config('DBUSER'),
+    'HOST': config('DBHOST'),
+    'PASSWORD': config('DBPASSWORD'),
+    'PORT': 5432,
+
     }
 }
 
@@ -120,7 +120,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Enable WhiteNoise compression and caching support
-STATICFILES_STORAGES = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Configure Redis cache and Django-rq
 CACHES = {
